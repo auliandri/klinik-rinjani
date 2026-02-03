@@ -15,10 +15,33 @@
         h1, h2, h3, .font-kids {
             font-family: 'Quicksand', sans-serif;
         }
-        .bg-rinjani-primary { background-color: #40E0D0; } /* Hijau Toska */
+        .bg-rinjani-primary { background-color: #40E0D0; }
         .text-rinjani-primary { color: #40E0D0; }
-        .bg-rinjani-sky { background-color: #87CEEB; } /* Biru Langit */
-        .bg-rinjani-accent { background-color: #FFF9C4; } /* Kuning Pastel */
+        .bg-rinjani-sky { background-color: #87CEEB; }
+        .bg-rinjani-accent { background-color: #FFF9C4; }
+        
+        /* Nav Link Hover Effect */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #40E0D0;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #40E0D0;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
         .hover-lift { transition: transform 0.2s; }
         .hover-lift:hover { transform: translateY(-5px); }
         .rounded-xl-custom { border-radius: 2rem; }
@@ -31,24 +54,27 @@
 
         .dot-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        @keyframes floating {
+        @keyframes floating-soft {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
 
-        .floating-card { animation: floating 4s ease-in-out infinite; }
-        .floating-card-delay-1 { animation: floating 4.5s ease-in-out infinite; animation-delay: 0.5s; }
-        .floating-card-delay-2 { animation: floating 5s ease-in-out infinite; animation-delay: 1s; }
-
-        .testi-card { transition: all 0.3s ease; }
-        .testi-card:hover {
-            animation-play-state: paused;
-            transform: translateY(-20px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(64, 224, 208, 0.2);
+        .testi-floating {
+            animation: floating-soft 5s ease-in-out infinite;
+        }
+        .testi-floating-alt {
+            animation: floating-soft 6s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        .testi-floating-slow {
+            animation: floating-soft 7s ease-in-out infinite;
+            animation-delay: 0.5s;
         }
 
-        /* Loading Spinner */
+        .testi-card { transition: all 0.3s ease; }
+        .testi-card:hover { animation-play-state: paused; transform: scale(1.02); }
+
         .spinner {
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -63,6 +89,11 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .modal-overlay {
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -71,20 +102,20 @@
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white">
+                <div class="flex items-center gap-2 group cursor-pointer">
+                    <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white group-hover:rotate-12 transition-transform">
                         <i class="fas fa-stethoscope"></i>
                     </div>
                     <span class="text-xl font-bold tracking-tight text-slate-700">Rinjani <span class="text-rinjani-primary">Medika</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 font-medium">
-                    <a href="#home" class="hover:text-rinjani-primary transition">Beranda</a>
-                    <a href="#layanan" class="hover:text-rinjani-primary transition">Layanan</a>
-                    <a href="#jadwal" class="hover:text-rinjani-primary transition">Jadwal</a>
-                    <a href="#testimoni" class="hover:text-rinjani-primary transition">Testimoni</a>
-                    <a href="#booking" class="hover:text-rinjani-primary transition">Reservasi</a>
+                    <a href="#home" class="nav-link text-slate-600">Beranda</a>
+                    <a href="#layanan" class="nav-link text-slate-600">Layanan</a>
+                    <a href="#jadwal" class="nav-link text-slate-600">Jadwal</a>
+                    <a href="#testimoni" class="nav-link text-slate-600">Testimoni</a>
+                    <a href="#booking" class="nav-link text-slate-600">Reservasi</a>
                 </div>
-                <a href="#booking" class="bg-rinjani-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-opacity-90 transition shadow-lg shadow-teal-100">
+                <a href="#booking" class="bg-rinjani-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-opacity-90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-teal-100">
                     Reservasi
                 </a>
             </div>
@@ -105,7 +136,7 @@
             </div>
             <div class="flex-1 relative">
                 <div class="w-full h-[400px] bg-rinjani-sky rounded-xl-custom overflow-hidden shadow-2xl relative">
-                    <img src="https://sa1s3optim.patientpop.com/assets/images/provider/photos/2720518.png?auto=format&fit=crop&q=80&w=800" alt="Pemeriksaan Anak" class="w-full h-full object-cover opacity-90">
+                    <img src="https://sa1s3optim.patientpop.com/assets/images/provider/photos/2720518.png" alt="Pemeriksaan Anak" class="w-full h-full object-cover opacity-95">
                     <div class="absolute bottom-6 left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce">
                         <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
                             <i class="fas fa-smile"></i>
@@ -204,7 +235,7 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold mb-4">Jadwal Praktik Dokter</h2>
-                <p class="text-slate-500">Temukan waktu yang tepat untuk kunjungan Anda.</p>
+                <p class="text-slate-500 italic">Klik pada nama dokter untuk melihat profil lengkap.</p>
             </div>
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
                 <div class="bg-rinjani-primary p-6 text-white text-center">
@@ -222,20 +253,26 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y text-sm md:text-base">
-                                <tr class="hover:bg-slate-50 transition">
-                                    <td class="py-4 px-2 font-bold text-slate-700">dr. Rinjani Kusuma, Sp.A</td>
+                                <tr class="hover:bg-teal-50 transition cursor-pointer group" onclick="showDoctorProfile('rinjani')">
+                                    <td class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
+                                        dr. Rinjani Kusuma, Sp.A <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                                    </td>
                                     <td class="py-4 px-2 text-slate-500">Spesialis Anak</td>
                                     <td class="py-4 px-2 text-slate-600">08:00 - 14:00</td>
                                     <td class="py-4 px-2 text-slate-600">09:00 - 12:00</td>
                                 </tr>
-                                <tr class="hover:bg-slate-50 transition">
-                                    <td class="py-4 px-2 font-bold text-slate-700">dr. Budi Santoso</td>
+                                <tr class="hover:bg-teal-50 transition cursor-pointer group" onclick="showDoctorProfile('budi')">
+                                    <td class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
+                                        dr. Budi Santoso <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                                    </td>
                                     <td class="py-4 px-2 text-slate-500">Dokter Umum</td>
                                     <td class="py-4 px-2 text-slate-600">14:00 - 20:00</td>
                                     <td class="py-4 px-2 text-red-400 font-medium">Libur</td>
                                 </tr>
-                                <tr class="hover:bg-slate-50 transition">
-                                    <td class="py-4 px-2 font-bold text-slate-700">dr. Siti Aminah, Sp.A</td>
+                                <tr class="hover:bg-teal-50 transition cursor-pointer group" onclick="showDoctorProfile('siti')">
+                                    <td class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
+                                        dr. Siti Aminah, Sp.A <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                                    </td>
                                     <td class="py-4 px-2 text-slate-500">Spesialis Anak</td>
                                     <td class="py-4 px-2 text-slate-600">16:00 - 20:00</td>
                                     <td class="py-4 px-2 text-slate-600">09:00 - 12:00</td>
@@ -248,68 +285,88 @@
         </div>
     </section>
 
+    <!-- Modal Profil Dokter -->
+    <div id="doctorModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-slate-900/60 modal-overlay" onclick="closeDoctorProfile()"></div>
+        <div class="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden transform transition-all scale-95 opacity-0 duration-300" id="modalContent">
+            <button onclick="closeDoctorProfile()" class="absolute top-6 right-6 w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-2/5 h-64 md:h-auto bg-rinjani-primary">
+                    <img id="docPhoto" src="" alt="Foto Dokter" class="w-full h-full object-cover">
+                </div>
+                <div class="md:w-3/5 p-8 md:p-10">
+                    <span id="docSpec" class="inline-block px-3 py-1 bg-rinjani-primary/10 text-rinjani-primary rounded-full text-xs font-bold uppercase mb-4 tracking-widest"></span>
+                    <h3 id="docName" class="text-2xl font-bold text-slate-800 mb-4"></h3>
+                    <p id="docBio" class="text-slate-600 leading-relaxed text-sm mb-6"></p>
+                    
+                    <div class="space-y-4 border-t pt-6 border-slate-100">
+                        <div>
+                            <h4 class="text-xs font-bold uppercase text-slate-400 mb-2">Pendidikan</h4>
+                            <p id="docEdu" class="text-slate-700 text-sm font-medium"></p>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold uppercase text-slate-400 mb-2">Keahlian</h4>
+                            <div id="docSkills" class="flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+
+                    <button onclick="closeDoctorProfile(); window.location.href='#booking';" class="mt-8 w-full bg-rinjani-primary text-white py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-teal-100 transition-all">
+                        Buat Janji dengan Dokter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Testimoni Pelanggan -->
     <section id="testimoni" class="py-32 px-4 bg-white overflow-hidden relative">
-        <div class="absolute top-10 left-10 w-32 h-32 bg-rinjani-primary/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-40 h-40 bg-rinjani-sky/10 rounded-full blur-3xl"></div>
-
         <div class="max-w-7xl mx-auto relative">
-            <div class="text-center mb-20">
+            <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-4">Apa Kata Para Orang Tua?</h2>
                 <p class="text-slate-500">Kepercayaan Anda adalah semangat kami untuk terus melayani.</p>
             </div>
             
-            <div class="relative px-4">
-                <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-8 z-20 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all hidden md:flex border border-slate-100 focus:outline-none group">
-                    <i class="fas fa-chevron-left group-hover:-translate-x-1 transition-transform"></i>
+            <div class="relative group">
+                <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-slate-100 text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
                 </button>
-                <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-8 z-20 w-14 h-14 bg-white rounded-full shadow-xl flex items-center justify-center text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all hidden md:flex border border-slate-100 focus:outline-none group">
-                    <i class="fas fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
+                <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-slate-100 text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
                 </button>
 
-                <div id="testiSlider" class="flex overflow-x-auto py-10 gap-8 hide-scrollbar snap-x scroll-smooth outline-none">
-                    <!-- Testi 1 -->
-                    <div class="min-w-[320px] md:min-w-[500px] snap-center floating-card testi-card bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative">
-                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-teal-100">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <div class="flex text-yellow-400 mb-6 gap-1">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-slate-600 text-lg italic mb-8 leading-relaxed font-light">"Dokter Rinjani sangat sabar menjelaskan kondisi anak saya. Ruang tunggunya juga nyaman sekali, si kecil nggak rewel karena ada area bermainnya."</p>
+                <div id="testiSlider" class="flex overflow-x-auto py-10 gap-8 hide-scrollbar snap-x snap-mandatory scroll-smooth px-4">
+                    <!-- Testimoni cards... -->
+                    <div class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
+                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl"><i class="fas fa-quote-left"></i></div>
+                        <p class="text-slate-600 text-lg italic mb-8">"Dokter Rinjani sangat sabar menjelaskan kondisi anak saya. Ruang tunggunya juga nyaman sekali dan sangat kid-friendly."</p>
                         <div class="flex items-center gap-5 border-t border-slate-50 pt-6">
-                            <div class="w-14 h-14 bg-slate-100 rounded-full overflow-hidden border-2 border-rinjani-primary/20 p-0.5">
-                                <img src="https://i.pravatar.cc/150?u=mama1" alt="Mama Alika" class="rounded-full">
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">Mama Alika</h4>
-                                <p class="text-xs text-rinjani-primary font-semibold uppercase tracking-widest">Pasien Poli Anak</p>
-                            </div>
+                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img src="https://i.pravatar.cc/150?u=mama1" alt="Mama Alika"></div>
+                            <div><h4 class="font-bold text-slate-800">Mama Alika</h4><p class="text-xs text-rinjani-primary font-bold">PASIEN POLI ANAK</p></div>
                         </div>
                     </div>
 
-                    <!-- Testi 2 -->
-                    <div class="min-w-[320px] md:min-w-[500px] snap-center floating-card-delay-1 testi-card bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative">
-                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-sky rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-sky-100">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <div class="flex text-yellow-400 mb-6 gap-1">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-slate-600 text-lg italic mb-8 leading-relaxed font-light">"Sistem pendaftaran via website ini sangat membantu. Tinggal klik WhatsApp, admin langsung balas cepat. Penanganan medisnya juga sangat profesional."</p>
+                    <div class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating-alt bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
+                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl"><i class="fas fa-quote-left"></i></div>
+                        <p class="text-slate-600 text-lg italic mb-8">"Layanan imunisasinya sangat cepat dan perawatnya sangat terampil menenangkan anak yang sedang takut jarum suntik."</p>
                         <div class="flex items-center gap-5 border-t border-slate-50 pt-6">
-                            <div class="w-14 h-14 bg-slate-100 rounded-full overflow-hidden border-2 border-rinjani-sky/20 p-0.5">
-                                <img src="https://i.pravatar.cc/150?u=papa1" alt="Papa Rian" class="rounded-full">
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-800">Papa Rian</h4>
-                                <p class="text-xs text-rinjani-primary font-semibold uppercase tracking-widest">Pasien Poli Umum</p>
-                            </div>
+                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img src="https://i.pravatar.cc/150?u=papa2" alt="Papa Dafa"></div>
+                            <div><h4 class="font-bold text-slate-800">Papa Dafa</h4><p class="text-xs text-rinjani-primary font-bold">PASIEN IMUNISASI</p></div>
+                        </div>
+                    </div>
+
+                    <div class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating-slow bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
+                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl"><i class="fas fa-quote-left"></i></div>
+                        <p class="text-slate-600 text-lg italic mb-8">"Senang sekali ada fitur tanya AI, sangat membantu saat panik malam-malam sebelum besoknya konsultasi ke dokter."</p>
+                        <div class="flex items-center gap-5 border-t border-slate-50 pt-6">
+                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img src="https://i.pravatar.cc/150?u=mama3" alt="Bunda Maya"></div>
+                            <div><h4 class="font-bold text-slate-800">Bunda Maya</h4><p class="text-xs text-rinjani-primary font-bold">PASIEN POLI UMUM</p></div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div id="sliderDots" class="flex justify-center gap-3 mt-12"></div>
         </div>
     </section>
@@ -319,49 +376,22 @@
         <div class="max-w-4xl mx-auto bg-white rounded-xl-custom shadow-2xl border border-teal-50 overflow-hidden flex flex-col md:flex-row">
             <div class="md:w-1/3 bg-rinjani-primary p-10 text-white flex flex-col justify-center">
                 <h2 class="text-3xl font-bold mb-6">Reservasi Cepat</h2>
-                <p class="mb-6 opacity-90">Isi data singkat di samping, dan sistem kami akan meneruskan ke WhatsApp admin untuk konfirmasi instan.</p>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Tanpa Antrean</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Konfirmasi Instan</span>
-                    </div>
-                </div>
+                <p class="mb-6 opacity-90">Isi data singkat di samping untuk konfirmasi WhatsApp instan.</p>
             </div>
             <div class="md:w-2/3 p-10">
                 <form id="reservationForm" class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-bold mb-2">Nama Pasien/Anak</label>
-                            <input type="text" id="patientName" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rinjani-primary" placeholder="Contoh: Andi">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold mb-2">Usia</label>
-                            <input type="text" id="patientAge" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rinjani-primary" placeholder="Contoh: 5 Tahun">
-                        </div>
+                        <input type="text" id="patientName" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary" placeholder="Nama Pasien">
+                        <input type="text" id="patientAge" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary" placeholder="Usia">
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold mb-2">Pilih Dokter/Layanan</label>
-                        <select id="service" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rinjani-primary">
-                            <option>Poli Anak - dr. Rinjani</option>
-                            <option>Poli Anak - dr. Siti Aminah</option>
-                            <option>Poli Umum - dr. Budi</option>
-                            <option>Layanan Imunisasi</option>
-                        </select>
-                    </div>
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-sm font-bold">Keluhan/Catatan</label>
-                            <button type="button" id="magicSummarize" class="text-xs font-bold text-rinjani-primary hover:underline">✨ Rapikan Keluhan AI</button>
-                        </div>
-                        <textarea id="notes" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rinjani-primary" placeholder="Contoh: Demam sejak kemarin malam..."></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-green-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 transition flex items-center justify-center gap-2 shadow-lg shadow-green-100">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                        Kirim via WhatsApp
+                    <select id="service" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary">
+                        <option>Poli Anak - dr. Rinjani</option>
+                        <option>Poli Anak - dr. Siti Aminah</option>
+                        <option>Poli Umum - dr. Budi</option>
+                    </select>
+                    <textarea id="notes" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary" placeholder="Keluhan singkat..."></textarea>
+                    <button type="submit" class="w-full bg-green-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
                     </button>
                 </form>
             </div>
@@ -371,224 +401,189 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-white pt-16 pb-8 px-4">
         <div class="max-w-7xl mx-auto flex flex-col items-center">
-            <!-- Brand & Tagline -->
             <div class="flex items-center gap-2 mb-6">
-                <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white">
-                    <i class="fas fa-stethoscope"></i>
-                </div>
+                <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white"><i class="fas fa-stethoscope"></i></div>
                 <span class="text-2xl font-bold">Rinjani <span class="text-rinjani-primary">Medika</span></span>
             </div>
-            
-            <!-- ✨ Contact & Address Section -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 w-full mb-12 text-center md:text-left border-y border-white/5 py-12">
-                <!-- Lokasi -->
                 <div class="space-y-4">
-                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Lokasi Klinik</span>
-                    </div>
-                    <p class="text-slate-300 leading-relaxed">
-                        Jl. Rinjani Raya No. 123, Mataram<br>
-                        Nusa Tenggara Barat, Indonesia<br>
-                        <span class="text-slate-500 italic text-sm">(Dekat Taman Kota Mataram)</span>
-                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs"><i class="fas fa-map-marker-alt"></i><span>Lokasi Klinik</span></div>
+                    <p class="text-slate-300">Jl. Rinjani Raya No. 123, Mataram<br>NTB, Indonesia <br><span class="text-slate-500 text-xs">(Dekat Taman Kota)</span></p>
                 </div>
-                
-                <!-- Jam Operasional -->
                 <div class="space-y-4">
-                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs">
-                        <i class="fas fa-clock"></i>
-                        <span>Jam Operasional</span>
-                    </div>
-                    <ul class="text-slate-300 space-y-1">
-                        <li>Senin - Jumat: 08:00 - 20:00</li>
-                        <li>Sabtu: 09:00 - 15:00</li>
-                        <li class="text-red-400">Minggu & Libur Nasional: Tutup</li>
-                    </ul>
+                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs"><i class="fas fa-clock"></i><span>Operasional</span></div>
+                    <ul class="text-slate-300"><li>Senin - Jumat: 08:00 - 20:00</li><li>Sabtu: 09:00 - 15:00</li><li class="text-red-400">Minggu: Tutup</li></ul>
                 </div>
-
-                <!-- Kontak Langsung -->
                 <div class="space-y-4">
-                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs">
-                        <i class="fas fa-phone-alt"></i>
-                        <span>Hubungi Kami</span>
-                    </div>
-                    <div class="space-y-2">
-                        <p class="text-slate-300">Email: hello@rinjanimedika.com</p>
-                        <p class="text-slate-300">Telp: (0370) 123 4567</p>
-                        <p class="text-rinjani-primary font-bold text-lg">WA: 0812-1275-2501</p>
-                    </div>
+                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs"><i class="fas fa-phone-alt"></i><span>Kontak</span></div>
+                    <p class="text-slate-300">WA: 0812-1275-2501<br>Telp: (0370) 123 4567</p>
                 </div>
             </div>
-            
-            <!-- ✨ Social Media Icons -->
-            <div class="flex items-center justify-center gap-6 mb-12">
-                <a href="https://youtube.com" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-white text-xl hover:bg-red-600 hover:scale-110 transition-all shadow-lg" title="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://instagram.com" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-white text-xl hover:bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 hover:scale-110 transition-all shadow-lg" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-white text-xl hover:bg-blue-600 hover:scale-110 transition-all shadow-lg" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://wa.me/081212752501" target="_blank" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-white text-xl hover:bg-green-500 hover:scale-110 transition-all shadow-lg" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
+            <div class="flex items-center gap-6 mb-12">
+                <a href="#" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-red-600 transition-all"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-pink-600 transition-all"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all"><i class="fab fa-facebook-f"></i></a>
             </div>
-
-            <!-- Bottom Footer -->
-            <div class="w-full pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
-                <p>© 2024 Rinjani Medika. Hak Cipta Dilindungi.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-white transition">Kebijakan Privasi</a>
-                    <a href="#" class="hover:text-white transition">Syarat & Ketentuan</a>
-                </div>
-            </div>
+            <p class="text-slate-500 text-xs">© 2024 Rinjani Medika. Hak Cipta Dilindungi.</p>
         </div>
     </footer>
 
     <script>
-        // API KEY (Provided by environment at runtime)
         const apiKey = "";
 
-        // Function for Gemini API calls
-        async function callGemini(prompt, systemPrompt = "Kamu adalah asisten medis ramah dari Klinik Rinjani Medika.") {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
-
-            let delay = 1000;
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        return data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    }
-                } catch (e) {}
-                await new Promise(r => setTimeout(r, delay));
-                delay *= 2;
+        const doctors = {
+            rinjani: {
+                name: "dr. Rinjani Kusuma, Sp.A",
+                spec: "Spesialis Anak",
+                bio: "Berpengalaman lebih dari 15 tahun dalam menangani kesehatan anak. Beliau dikenal sangat ramah dan ahli dalam menangani tumbuh kembang anak serta imunisasi.",
+                photo: "https://sa1s3optim.patientpop.com/assets/images/provider/photos/2720518.png",
+                edu: "Fakultas Kedokteran Universitas Indonesia (Spesialis Anak)",
+                skills: ["Imunisasi", "Tumbuh Kembang", "Gizi Anak", "Alergi"]
+            },
+            budi: {
+                name: "dr. Budi Santoso",
+                spec: "Dokter Umum",
+                bio: "Dokter keluarga yang berdedikasi tinggi dengan pendekatan holistik. Memiliki keahlian dalam diagnosa awal dan penanganan penyakit umum untuk segala usia.",
+                photo: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400",
+                edu: "Fakultas Kedokteran Universitas Gadjah Mada",
+                skills: ["Cek Kesehatan Rutin", "Manajemen Diabetes", "Hipertensi"]
+            },
+            siti: {
+                name: "dr. Siti Aminah, Sp.A",
+                spec: "Spesialis Anak",
+                bio: "Fokus pada kesehatan preventif dan edukasi orang tua. Sangat komunikatif dalam menjelaskan tahapan pemulihan pasien cilik.",
+                photo: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400",
+                edu: "Fakultas Kedokteran Universitas Airlangga",
+                skills: ["Infeksi Anak", "Kesehatan Bayi Baru Lahir", "Vaksinasi"]
             }
-            throw new Error("Gagal menghubungi AI. Silakan coba lagi.");
+        };
+
+        function showDoctorProfile(id) {
+            const doc = doctors[id];
+            const modal = document.getElementById('doctorModal');
+            const content = document.getElementById('modalContent');
+            
+            document.getElementById('docPhoto').src = doc.photo;
+            document.getElementById('docName').innerText = doc.name;
+            document.getElementById('docSpec').innerText = doc.spec;
+            document.getElementById('docBio').innerText = doc.bio;
+            document.getElementById('docEdu').innerText = doc.edu;
+            
+            const skillsContainer = document.getElementById('docSkills');
+            skillsContainer.innerHTML = '';
+            doc.skills.forEach(skill => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-semibold';
+                span.innerText = skill;
+                skillsContainer.appendChild(span);
+            });
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
         }
 
-        // ✨ AI Health Advice Feature
-        const aiQueryInput = document.getElementById('aiQuery');
-        const getAiAdviceBtn = document.getElementById('getAiAdvice');
-        const aiBtnText = document.getElementById('aiBtnText');
-        const aiLoading = document.getElementById('aiLoading');
-        const aiResponseContainer = document.getElementById('aiResponseContainer');
-        const aiResponseText = document.getElementById('aiResponseText');
+        function closeDoctorProfile() {
+            const modal = document.getElementById('doctorModal');
+            const content = document.getElementById('modalContent');
+            content.classList.add('scale-95', 'opacity-0');
+            content.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
 
-        getAiAdviceBtn.addEventListener('click', async () => {
-            const query = aiQueryInput.value.trim();
-            if (!query) return;
-
-            aiBtnText.classList.add('hidden');
-            aiLoading.classList.remove('hidden');
-            getAiAdviceBtn.disabled = true;
-
-            try {
-                const systemPrompt = "Kamu adalah dokter asisten cerdas di Klinik Rinjani Medika. Berikan saran medis singkat, ramah, dan menenangkan dalam bahasa Indonesia. Selalu ingatkan bahwa ini bukan diagnosa resmi dan sarankan untuk datang ke klinik jika gejala berlanjut.";
-                const advice = await callGemini(query, systemPrompt);
-                
-                aiResponseText.innerText = advice;
-                aiResponseContainer.classList.remove('hidden');
-            } catch (error) {
-                alert("Maaf, sedang ada kendala koneksi ke asisten AI.");
-            } finally {
-                aiBtnText.classList.remove('hidden');
-                aiLoading.classList.add('hidden');
-                getAiAdviceBtn.disabled = false;
-            }
-        });
-
-        // ✨ Magic Summarize for Notes
-        const magicBtn = document.getElementById('magicSummarize');
-        const notesArea = document.getElementById('notes');
-
-        magicBtn.addEventListener('click', async () => {
-            const text = notesArea.value.trim();
-            if (!text || text.length < 5) return;
-
-            const originalText = magicBtn.innerHTML;
-            magicBtn.innerHTML = '<span class="spinner !border-rinjani-primary !border-t-transparent !w-3 !h-3"></span> Menganalisa...';
-            magicBtn.disabled = true;
-
-            try {
-                const summary = await callGemini(`Tulis ulang keluhan medis ini menjadi lebih rapi, terstruktur, dan formal untuk laporan ke dokter: "${text}"`, "Kamu adalah sekretaris medis yang merapikan catatan pasien.");
-                notesArea.value = summary.trim();
-            } catch (e) {
-                console.error(e);
-            } finally {
-                magicBtn.innerHTML = originalText;
-                magicBtn.disabled = false;
-            }
-        });
-
-        // WhatsApp Integration
-        document.getElementById('reservationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('patientName').value;
-            const age = document.getElementById('patientAge').value;
-            const service = document.getElementById('service').value;
-            const notes = document.getElementById('notes').value;
-            const phoneNumber = "081212752501"; 
-            const message = `Halo Admin Rinjani Medika, saya ingin reservasi:\n\nNama: ${name}\nUsia: ${age}\nLayanan: ${service}\nCatatan: ${notes}`;
-            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-        });
-
-        // Testimonial Logic
         const slider = document.getElementById('testiSlider');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
         const dotsContainer = document.getElementById('sliderDots');
-        const testiItems = slider.querySelectorAll('.snap-center');
-
-        function getScrollStep() { return testiItems[0].offsetWidth + 32; }
-
-        testiItems.forEach((_, index) => {
+        const cards = slider.querySelectorAll('.testi-card');
+        
+        cards.forEach((_, i) => {
             const dot = document.createElement('div');
-            dot.className = `h-2 rounded-full dot-transition cursor-pointer ${index === 0 ? 'bg-rinjani-primary w-8' : 'bg-slate-200 w-2'}`;
+            dot.className = `w-3 h-3 rounded-full cursor-pointer dot-transition ${i === 0 ? 'bg-rinjani-primary w-8' : 'bg-slate-200'}`;
             dot.addEventListener('click', () => {
-                slider.scrollTo({ left: index * getScrollStep(), behavior: 'smooth' });
+                const scrollPos = i * (cards[0].offsetWidth + 32);
+                slider.scrollTo({ left: scrollPos, behavior: 'smooth' });
             });
             dotsContainer.appendChild(dot);
         });
 
-        slider.addEventListener('scroll', () => {
-            const index = Math.round(slider.scrollLeft / getScrollStep());
-            const dots = dotsContainer.querySelectorAll('div');
-            dots.forEach((dot, i) => {
-                if (i === index) {
+        const dots = dotsContainer.children;
+
+        function updateSliderUI() {
+            const cardWidth = cards[0].offsetWidth + 32;
+            const index = Math.round(slider.scrollLeft / cardWidth);
+            Array.from(dots).forEach((dot, i) => {
+                if(i === index) {
                     dot.classList.add('bg-rinjani-primary', 'w-8');
-                    dot.classList.remove('bg-slate-200', 'w-2');
+                    dot.classList.remove('bg-slate-200');
                 } else {
                     dot.classList.remove('bg-rinjani-primary', 'w-8');
-                    dot.classList.add('bg-slate-200', 'w-2');
+                    dot.classList.add('bg-slate-200');
                 }
             });
+        }
+
+        slider.addEventListener('scroll', updateSliderUI);
+
+        nextBtn.addEventListener('click', () => {
+            const cardWidth = cards[0].offsetWidth + 32;
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            if (slider.scrollLeft >= maxScroll - 10) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            }
         });
 
-        // Appearance Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        }, { threshold: 0.1 });
+        prevBtn.addEventListener('click', () => {
+            const cardWidth = cards[0].offsetWidth + 32;
+            if (slider.scrollLeft <= 10) {
+                const maxScroll = slider.scrollWidth - slider.clientWidth;
+                slider.scrollTo({ left: maxScroll, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+            }
+        });
 
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
-            observer.observe(section);
+        async function callGemini(prompt, systemPrompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: systemPrompt }] } };
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (res.ok) { const data = await res.json(); return data.candidates?.[0]?.content?.parts?.[0]?.text; }
+                } catch (e) {}
+                await new Promise(r => setTimeout(r, delay)); delay *= 2;
+            }
+            throw new Error("Gagal.");
+        }
+
+        document.getElementById('getAiAdvice').addEventListener('click', async () => {
+            const query = document.getElementById('aiQuery').value.trim();
+            if (!query) return;
+            document.getElementById('aiBtnText').classList.add('hidden');
+            document.getElementById('aiLoading').classList.remove('hidden');
+            try {
+                const res = await callGemini(query, "Kamu adalah dokter asisten Klinik Rinjani Medika. Berikan saran medis ramah.");
+                document.getElementById('aiResponseText').innerText = res;
+                document.getElementById('aiResponseContainer').classList.remove('hidden');
+            } catch (e) { alert("Error."); } finally {
+                document.getElementById('aiBtnText').classList.remove('hidden');
+                document.getElementById('aiLoading').classList.add('hidden');
+            }
+        });
+
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = `Halo Admin Rinjani Medika, saya ${document.getElementById('patientName').value} ingin reservasi layanan ${document.getElementById('service').value}.`;
+            window.open(`https://wa.me/081212752501?text=${encodeURIComponent(message)}`, '_blank');
         });
     </script>
 </body>
