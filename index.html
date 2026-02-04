@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klinik Rinjani Medika - Profesional & Ramah Anak</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Outfit', sans-serif;
             scroll-behavior: smooth;
         }
-        h1, h2, h3, .font-kids {
+
+        h1,
+        h2,
+        h3,
+        .font-kids {
             font-family: 'Quicksand', sans-serif;
         }
-        .bg-rinjani-primary { background-color: #40E0D0; }
-        .text-rinjani-primary { color: #40E0D0; }
-        .bg-rinjani-sky { background-color: #87CEEB; }
-        .bg-rinjani-accent { background-color: #FFF9C4; }
-        
+
+        .bg-rinjani-primary {
+            background-color: #40E0D0;
+        }
+
+        .text-rinjani-primary {
+            color: #40E0D0;
+        }
+
+        .bg-rinjani-sky {
+            background-color: #87CEEB;
+        }
+
+        .bg-rinjani-accent {
+            background-color: #FFF9C4;
+        }
+
         /* Nav Link Hover Effect */
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
         }
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -35,39 +56,87 @@
             background-color: #40E0D0;
             transition: width 0.3s ease;
         }
+
         .nav-link:hover {
             color: #40E0D0;
         }
+
         .nav-link:hover::after {
             width: 100%;
         }
 
-        .hover-lift { transition: transform 0.2s; }
-        .hover-lift:hover { transform: translateY(-5px); }
-        .rounded-xl-custom { border-radius: 2rem; }
-        
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        .snap-x { scroll-snap-type: x mandatory; }
-        .snap-center { scroll-snap-align: center; }
+        .hover-lift {
+            transition: transform 0.2s;
+        }
 
-        .dot-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+
+        .rounded-xl-custom {
+            border-radius: 2rem;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .snap-x {
+            scroll-snap-type: x mandatory;
+        }
+
+        .snap-center {
+            scroll-snap-align: center;
+        }
+
+        .dot-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         @keyframes floating-soft {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         /* Animasi Berdenyut (Pulse) */
         @keyframes heart-pulse {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.3); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.3);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .animate-heart-pulse {
@@ -78,17 +147,25 @@
         .testi-floating {
             animation: floating-soft 5s ease-in-out infinite;
         }
+
         .testi-floating-alt {
             animation: floating-soft 6s ease-in-out infinite;
             animation-delay: 1s;
         }
+
         .testi-floating-slow {
             animation: floating-soft 7s ease-in-out infinite;
             animation-delay: 0.5s;
         }
 
-        .testi-card { transition: all 0.3s ease; }
-        .testi-card:hover { animation-play-state: paused; transform: scale(1.02); }
+        .testi-card {
+            transition: all 0.3s ease;
+        }
+
+        .testi-card:hover {
+            animation-play-state: paused;
+            transform: scale(1.02);
+        }
 
         .spinner {
             border: 3px solid rgba(255, 255, 255, 0.3);
@@ -100,9 +177,15 @@
             display: inline-block;
             vertical-align: middle;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .modal-overlay {
@@ -111,6 +194,7 @@
         }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800">
 
     <!-- Navigation -->
@@ -118,10 +202,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center gap-2 group cursor-pointer">
-                    <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white group-hover:rotate-12 transition-transform">
+                    <div
+                        class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white group-hover:rotate-12 transition-transform">
                         <i class="fas fa-stethoscope"></i>
                     </div>
-                    <span class="text-xl font-bold tracking-tight text-slate-700">Rinjani <span class="text-rinjani-primary">Medika</span></span>
+                    <span class="text-xl font-bold tracking-tight text-slate-700">Rinjani <span
+                            class="text-rinjani-primary">Medika</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 font-medium">
                     <a href="#home" class="nav-link text-slate-600">Beranda</a>
@@ -130,7 +216,8 @@
                     <a href="#testimoni" class="nav-link text-slate-600">Testimoni</a>
                     <a href="#booking" class="nav-link text-slate-600">Reservasi</a>
                 </div>
-                <a href="#booking" class="bg-rinjani-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-opacity-90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-teal-100">
+                <a href="#booking"
+                    class="bg-rinjani-primary text-white px-6 py-2.5 rounded-full font-semibold hover:bg-opacity-90 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-teal-100">
                     Reservasi
                 </a>
             </div>
@@ -141,20 +228,30 @@
     <section id="home" class="pt-32 pb-20 px-4 bg-gradient-to-b from-teal-50 to-white">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="flex-1 space-y-6 text-center md:text-left">
-                <span class="inline-block px-4 py-1 bg-rinjani-accent text-amber-700 rounded-full text-sm font-bold uppercase tracking-wider">Kid-Friendly & Pakar</span>
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight">Solusi Kesehatan Keluarga dengan <span class="text-rinjani-primary">Sentuhan Hangat.</span></h1>
-                <p class="text-lg text-slate-600 max-w-xl">Kami hadir memberikan pelayanan medis profesional yang nyaman bagi anak dan menenangkan bagi orang tua.</p>
+                <span
+                    class="inline-block px-4 py-1 bg-rinjani-accent text-amber-700 rounded-full text-sm font-bold uppercase tracking-wider">Kid-Friendly
+                    & Pakar</span>
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight">Solusi Kesehatan Keluarga dengan <span
+                        class="text-rinjani-primary">Sentuhan Hangat.</span></h1>
+                <p class="text-lg text-slate-600 max-w-xl">Kami hadir memberikan pelayanan medis profesional yang nyaman
+                    bagi anak dan menenangkan bagi orang tua.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#booking" class="px-8 py-4 bg-rinjani-primary text-white rounded-full font-bold text-lg shadow-xl shadow-teal-200 hover:scale-105 transition">Daftar Sekarang</a>
-                    <a href="#ai-advice" class="px-8 py-4 bg-white border-2 border-rinjani-primary/30 text-rinjani-primary rounded-full font-bold text-lg hover:bg-teal-50 transition">✨ Tanya Saran Kesehatan AI</a>
+                    <a href="#booking"
+                        class="px-8 py-4 bg-rinjani-primary text-white rounded-full font-bold text-lg shadow-xl shadow-teal-200 hover:scale-105 transition">Daftar
+                        Sekarang</a>
+                    <a href="#ai-advice"
+                        class="px-8 py-4 bg-white border-2 border-rinjani-primary/30 text-rinjani-primary rounded-full font-bold text-lg hover:bg-teal-50 transition">✨
+                        Tanya Saran Kesehatan AI</a>
                 </div>
             </div>
             <div class="flex-1 relative">
                 <div class="w-full h-[400px] bg-rinjani-sky rounded-xl-custom overflow-hidden shadow-2xl relative">
-                    <img src="https://sa1s3optim.patientpop.com/assets/images/provider/photos/2720518.png" alt="Pemeriksaan Anak" class="w-full h-full object-cover opacity-95">
-                    
+                    <img src="https://sa1s3optim.patientpop.com/assets/images/provider/photos/2720518.png"
+                        alt="Pemeriksaan Anak" class="w-full h-full object-cover opacity-95">
+
                     <!-- Floating Card dengan Animasi Pulse pada Ikon Heart -->
-                    <div class="absolute bottom-6 left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 hover-lift">
+                    <div
+                        class="absolute bottom-6 left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 hover-lift">
                         <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-500">
                             <i class="fas fa-heartbeat text-xl animate-heart-pulse"></i>
                         </div>
@@ -172,25 +269,32 @@
     <section id="ai-advice" class="py-20 px-4 bg-teal-50/50">
         <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-teal-100">
             <div class="text-center mb-8">
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-rinjani-primary/10 text-rinjani-primary font-bold text-sm mb-4">
+                <div
+                    class="inline-flex items-center px-4 py-2 rounded-full bg-rinjani-primary/10 text-rinjani-primary font-bold text-sm mb-4">
                     <i class="fas fa-sparkles mr-2"></i> POWERED BY GEMINI AI
                 </div>
                 <h2 class="text-3xl font-bold mb-2">Asisten Kesehatan Pintar ✨</h2>
-                <p class="text-slate-500">Punya pertanyaan seputar kesehatan anak? Tanyakan di sini untuk saran awal yang cepat.</p>
+                <p class="text-slate-500">Punya pertanyaan seputar kesehatan anak? Tanyakan di sini untuk saran awal
+                    yang cepat.</p>
             </div>
-            
+
             <div class="space-y-6">
                 <div class="relative">
-                    <textarea id="aiQuery" rows="3" class="w-full px-6 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rinjani-primary text-lg" placeholder="Contoh: Anak saya batuk pilek sejak 2 hari lalu, apa yang harus saya lakukan?"></textarea>
+                    <textarea id="aiQuery" rows="3"
+                        class="w-full px-6 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rinjani-primary text-lg"
+                        placeholder="Contoh: Anak saya batuk pilek sejak 2 hari lalu, apa yang harus saya lakukan?"></textarea>
                 </div>
-                <button id="getAiAdvice" class="w-full bg-rinjani-primary text-white py-4 rounded-2xl font-bold text-lg hover:bg-opacity-90 transition-all flex items-center justify-center gap-3">
+                <button id="getAiAdvice"
+                    class="w-full bg-rinjani-primary text-white py-4 rounded-2xl font-bold text-lg hover:bg-opacity-90 transition-all flex items-center justify-center gap-3">
                     <span id="aiBtnText">✨ Dapatkan Saran Kesehatan</span>
                     <div id="aiLoading" class="hidden"><span class="spinner"></span></div>
                 </button>
-                
-                <div id="aiResponseContainer" class="hidden mt-8 p-6 bg-slate-50 rounded-2xl border-l-4 border-rinjani-primary">
+
+                <div id="aiResponseContainer"
+                    class="hidden mt-8 p-6 bg-slate-50 rounded-2xl border-l-4 border-rinjani-primary">
                     <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white shrink-0">
+                        <div
+                            class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white shrink-0">
                             <i class="fas fa-robot"></i>
                         </div>
                         <div>
@@ -198,7 +302,8 @@
                             <p id="aiResponseText" class="text-slate-600 leading-relaxed"></p>
                             <div class="mt-4 p-3 bg-amber-50 text-amber-700 text-xs rounded-lg flex items-center gap-2">
                                 <i class="fas fa-info-circle"></i>
-                                <span>Penting: Ini adalah saran otomatis. Silakan konsultasi langsung dengan dokter kami untuk diagnosa medis.</span>
+                                <span>Penting: Ini adalah saran otomatis. Silakan konsultasi langsung dengan dokter kami
+                                    untuk diagnosa medis.</span>
                             </div>
                         </div>
                     </div>
@@ -216,28 +321,32 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center hover-lift">
-                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <div
+                        class="w-16 h-16 bg-pink-100 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                         <i class="fas fa-baby"></i>
                     </div>
                     <h3 class="font-bold text-xl mb-3">Poli Anak</h3>
                     <p class="text-slate-500 text-sm">Konsultasi pertumbuhan dan kesehatan anak secara menyeluruh.</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center hover-lift">
-                    <div class="w-16 h-16 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <div
+                        class="w-16 h-16 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                         <i class="fas fa-syringe"></i>
                     </div>
                     <h3 class="font-bold text-xl mb-3">Imunisasi</h3>
                     <p class="text-slate-500 text-sm">Layanan vaksinasi lengkap dengan jadwal yang fleksibel.</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center hover-lift">
-                    <div class="w-16 h-16 bg-green-100 text-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <div
+                        class="w-16 h-16 bg-green-100 text-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                         <i class="fas fa-seedling"></i>
                     </div>
                     <h3 class="font-bold text-xl mb-3">Tumbuh Kembang</h3>
                     <p class="text-slate-500 text-sm">Pemantauan aspek motorik dan kognitif anak sejak dini.</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 text-center hover-lift">
-                    <div class="w-16 h-16 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <div
+                        class="w-16 h-16 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                         <i class="fas fa-user-md"></i>
                     </div>
                     <h3 class="font-bold text-xl mb-3">Poli Umum</h3>
@@ -270,25 +379,34 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y text-sm md:text-base">
-                                <tr class="hover:bg-teal-50 transition cursor-pointer group" onclick="showDoctorProfile('rinjani')">
-                                    <td class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
-                                        dr. Rinjani Kusuma, Sp.A <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                                <tr class="hover:bg-teal-50 transition cursor-pointer group"
+                                    onclick="showDoctorProfile('rinjani')">
+                                    <td
+                                        class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
+                                        dr. Rinjani Kusuma, Sp.A <i
+                                            class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
                                     </td>
                                     <td class="py-4 px-2 text-slate-500">Spesialis Anak</td>
                                     <td class="py-4 px-2 text-slate-600">08:00 - 14:00</td>
                                     <td class="py-4 px-2 text-slate-600">09:00 - 12:00</td>
                                 </tr>
-                                <tr class="hover:bg-teal-50 transition cursor-pointer group" onclick="showDoctorProfile('budi')">
-                                    <td class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
-                                        dr. Budi Santoso <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                                <tr class="hover:bg-teal-50 transition cursor-pointer group"
+                                    onclick="showDoctorProfile('budi')">
+                                    <td
+                                        class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
+                                        dr. Budi Santoso <i
+                                            class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
                                     </td>
                                     <td class="py-4 px-2 text-slate-500">Dokter Umum</td>
                                     <td class="py-4 px-2 text-slate-600">14:00 - 20:00</td>
                                     <td class="py-4 px-2 text-red-400 font-medium">Libur</td>
                                 </tr>
-                                <tr class="hover:bg-teal-50 transition cursor-pointer group" onclick="showDoctorProfile('siti')">
-                                    <td class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
-                                        dr. Siti Aminah, Sp.A <i class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                                <tr class="hover:bg-teal-50 transition cursor-pointer group"
+                                    onclick="showDoctorProfile('siti')">
+                                    <td
+                                        class="py-4 px-2 font-bold text-rinjani-primary group-hover:underline underline-offset-4 flex items-center gap-2">
+                                        dr. Siti Aminah, Sp.A <i
+                                            class="fas fa-external-link-alt text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
                                     </td>
                                     <td class="py-4 px-2 text-slate-500">Spesialis Anak</td>
                                     <td class="py-4 px-2 text-slate-600">16:00 - 20:00</td>
@@ -305,8 +423,10 @@
     <!-- Modal Profil Dokter -->
     <div id="doctorModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden">
         <div class="absolute inset-0 bg-slate-900/60 modal-overlay" onclick="closeDoctorProfile()"></div>
-        <div class="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden transform transition-all scale-95 opacity-0 duration-300" id="modalContent">
-            <button onclick="closeDoctorProfile()" class="absolute top-6 right-6 w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors z-20">
+        <div class="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden transform transition-all scale-95 opacity-0 duration-300"
+            id="modalContent">
+            <button onclick="closeDoctorProfile()"
+                class="absolute top-6 right-6 w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors z-20">
                 <i class="fas fa-times"></i>
             </button>
             <div class="flex flex-col md:flex-row">
@@ -314,10 +434,11 @@
                     <img id="docPhoto" src="" alt="Foto Dokter" class="w-full h-full object-cover">
                 </div>
                 <div class="md:w-3/5 p-8 md:p-10">
-                    <span id="docSpec" class="inline-block px-3 py-1 bg-rinjani-primary/10 text-rinjani-primary rounded-full text-xs font-bold uppercase mb-4 tracking-widest"></span>
+                    <span id="docSpec"
+                        class="inline-block px-3 py-1 bg-rinjani-primary/10 text-rinjani-primary rounded-full text-xs font-bold uppercase mb-4 tracking-widest"></span>
                     <h3 id="docName" class="text-2xl font-bold text-slate-800 mb-4"></h3>
                     <p id="docBio" class="text-slate-600 leading-relaxed text-sm mb-6"></p>
-                    
+
                     <div class="space-y-4 border-t pt-6 border-slate-100">
                         <div>
                             <h4 class="text-xs font-bold uppercase text-slate-400 mb-2">Pendidikan</h4>
@@ -329,7 +450,8 @@
                         </div>
                     </div>
 
-                    <button onclick="closeDoctorProfile(); window.location.href='#booking';" class="mt-8 w-full bg-rinjani-primary text-white py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-teal-100 transition-all">
+                    <button onclick="closeDoctorProfile(); window.location.href='#booking';"
+                        class="mt-8 w-full bg-rinjani-primary text-white py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-teal-100 transition-all">
                         Buat Janji dengan Dokter
                     </button>
                 </div>
@@ -344,40 +466,70 @@
                 <h2 class="text-3xl font-bold mb-4">Apa Kata Para Orang Tua?</h2>
                 <p class="text-slate-500">Kepercayaan Anda adalah semangat kami untuk terus melayani.</p>
             </div>
-            
+
             <div class="relative group">
-                <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-slate-100 text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all flex items-center justify-center">
+                <button id="prevBtn"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-slate-100 text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all flex items-center justify-center">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-slate-100 text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all flex items-center justify-center">
+                <button id="nextBtn"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-slate-100 text-rinjani-primary hover:bg-rinjani-primary hover:text-white transition-all flex items-center justify-center">
                     <i class="fas fa-chevron-right"></i>
                 </button>
 
-                <div id="testiSlider" class="flex overflow-x-auto py-10 gap-8 hide-scrollbar snap-x snap-mandatory scroll-smooth px-4">
-                    <div class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
-                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl"><i class="fas fa-quote-left"></i></div>
-                        <p class="text-slate-600 text-lg italic mb-8">"Dokter Rinjani sangat sabar menjelaskan kondisi anak saya. Ruang tunggunya juga nyaman sekali dan sangat kid-friendly."</p>
+                <div id="testiSlider"
+                    class="flex overflow-x-auto py-10 gap-8 hide-scrollbar snap-x snap-mandatory scroll-smooth px-4">
+                    <div
+                        class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
+                        <div
+                            class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="text-slate-600 text-lg italic mb-8">"Dokter Rinjani sangat sabar menjelaskan kondisi
+                            anak saya. Ruang tunggunya juga nyaman sekali dan sangat kid-friendly."</p>
                         <div class="flex items-center gap-5 border-t border-slate-50 pt-6">
-                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img src="https://i.pravatar.cc/150?u=mama1" alt="Mama Alika"></div>
-                            <div><h4 class="font-bold text-slate-800">Mama Alika</h4><p class="text-xs text-rinjani-primary font-bold">PASIEN POLI ANAK</p></div>
+                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img
+                                    src="https://i.pravatar.cc/150?u=mama1" alt="Mama Alika"></div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Mama Alika</h4>
+                                <p class="text-xs text-rinjani-primary font-bold">PASIEN POLI ANAK</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating-alt bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
-                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl"><i class="fas fa-quote-left"></i></div>
-                        <p class="text-slate-600 text-lg italic mb-8">"Layanan imunisasinya sangat cepat dan perawatnya sangat terampil menenangkan anak yang sedang takut jarum suntik."</p>
+                    <div
+                        class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating-alt bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
+                        <div
+                            class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="text-slate-600 text-lg italic mb-8">"Layanan imunisasinya sangat cepat dan perawatnya
+                            sangat terampil menenangkan anak yang sedang takut jarum suntik."</p>
                         <div class="flex items-center gap-5 border-t border-slate-50 pt-6">
-                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img src="https://i.pravatar.cc/150?u=papa2" alt="Papa Dafa"></div>
-                            <div><h4 class="font-bold text-slate-800">Papa Dafa</h4><p class="text-xs text-rinjani-primary font-bold">PASIEN IMUNISASI</p></div>
+                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img
+                                    src="https://i.pravatar.cc/150?u=papa2" alt="Papa Dafa"></div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Papa Dafa</h4>
+                                <p class="text-xs text-rinjani-primary font-bold">PASIEN IMUNISASI</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating-slow bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
-                        <div class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl"><i class="fas fa-quote-left"></i></div>
-                        <p class="text-slate-600 text-lg italic mb-8">"Senang sekali ada fitur tanya AI, sangat membantu saat panik malam-malam sebelum besoknya konsultasi ke dokter."</p>
+                    <div
+                        class="min-w-full md:min-w-[450px] snap-center testi-card testi-floating-slow bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-100 border border-slate-50 relative hover:border-rinjani-primary/30 transition-all">
+                        <div
+                            class="absolute -top-6 left-10 w-12 h-12 bg-rinjani-primary rounded-2xl flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="text-slate-600 text-lg italic mb-8">"Senang sekali ada fitur tanya AI, sangat membantu
+                            saat panik malam-malam sebelum besoknya konsultasi ke dokter."</p>
                         <div class="flex items-center gap-5 border-t border-slate-50 pt-6">
-                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img src="https://i.pravatar.cc/150?u=mama3" alt="Bunda Maya"></div>
-                            <div><h4 class="font-bold text-slate-800">Bunda Maya</h4><p class="text-xs text-rinjani-primary font-bold">PASIEN POLI UMUM</p></div>
+                            <div class="w-12 h-12 bg-slate-100 rounded-full overflow-hidden"><img
+                                    src="https://i.pravatar.cc/150?u=mama3" alt="Bunda Maya"></div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">Bunda Maya</h4>
+                                <p class="text-xs text-rinjani-primary font-bold">PASIEN POLI UMUM</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -389,7 +541,8 @@
 
     <!-- Booking Form -->
     <section id="booking" class="py-20 px-4">
-        <div class="max-w-4xl mx-auto bg-white rounded-xl-custom shadow-2xl border border-teal-50 overflow-hidden flex flex-col md:flex-row">
+        <div
+            class="max-w-4xl mx-auto bg-white rounded-xl-custom shadow-2xl border border-teal-50 overflow-hidden flex flex-col md:flex-row">
             <div class="md:w-1/3 bg-rinjani-primary p-10 text-white flex flex-col justify-center">
                 <h2 class="text-3xl font-bold mb-6">Reservasi Cepat</h2>
                 <p class="mb-6 opacity-90">Isi data singkat di samping untuk konfirmasi WhatsApp instan.</p>
@@ -397,16 +550,24 @@
             <div class="md:w-2/3 p-10">
                 <form id="reservationForm" class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="patientName" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary" placeholder="Nama Pasien">
-                        <input type="text" id="patientAge" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary" placeholder="Usia">
+                        <input type="text" id="patientName" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary"
+                            placeholder="Nama Pasien">
+                        <input type="text" id="patientAge" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary"
+                            placeholder="Usia">
                     </div>
-                    <select id="service" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary">
+                    <select id="service"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary">
                         <option>Poli Anak - dr. Rinjani</option>
                         <option>Poli Anak - dr. Siti Aminah</option>
                         <option>Poli Umum - dr. Budi</option>
                     </select>
-                    <textarea id="notes" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary" placeholder="Keluhan singkat..."></textarea>
-                    <button type="submit" class="w-full bg-green-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+                    <textarea id="notes" rows="3"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-rinjani-primary"
+                        placeholder="Keluhan singkat..."></textarea>
+                    <button type="submit"
+                        class="w-full bg-green-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-600 transition shadow-lg shadow-green-100 flex items-center justify-center gap-2">
                         <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
                     </button>
                 </form>
@@ -418,27 +579,49 @@
     <footer class="bg-slate-900 text-white pt-16 pb-8 px-4">
         <div class="max-w-7xl mx-auto flex flex-col items-center">
             <div class="flex items-center gap-2 mb-6">
-                <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white"><i class="fas fa-stethoscope"></i></div>
+                <div class="w-10 h-10 bg-rinjani-primary rounded-full flex items-center justify-center text-white"><i
+                        class="fas fa-stethoscope"></i></div>
                 <span class="text-2xl font-bold">Rinjani <span class="text-rinjani-primary">Medika</span></span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 w-full mb-12 text-center md:text-left border-y border-white/5 py-12">
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-10 w-full mb-12 text-center md:text-left border-y border-white/5 py-12">
                 <div class="space-y-4">
-                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs"><i class="fas fa-map-marker-alt"></i><span>Lokasi Klinik</span></div>
-                    <p class="text-slate-300">Jl. Rinjani Raya No. 123, Mataram<br>NTB, Indonesia <br><span class="text-slate-500 text-xs">(Dekat Taman Kota)</span></p>
+                    <div
+                        class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs">
+                        <i class="fas fa-map-marker-alt"></i><span>Lokasi Klinik</span>
+                    </div>
+                    <p class="text-slate-300">Jl. Rinjani Raya No. 123, Mataram<br>NTB, Indonesia <br><span
+                            class="text-slate-500 text-xs">(Dekat Taman Kota)</span></p>
                 </div>
                 <div class="space-y-4">
-                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs"><i class="fas fa-clock"></i><span>Operasional</span></div>
-                    <ul class="text-slate-300"><li>Senin - Jumat: 08:00 - 20:00</li><li>Sabtu: 09:00 - 15:00</li><li class="text-red-400">Minggu: Tutup</li></ul>
+                    <div
+                        class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs">
+                        <i class="fas fa-clock"></i><span>Operasional</span>
+                    </div>
+                    <ul class="text-slate-300">
+                        <li>Senin - Jumat: 08:00 - 20:00</li>
+                        <li>Sabtu: 09:00 - 15:00</li>
+                        <li class="text-red-400">Minggu: Tutup</li>
+                    </ul>
                 </div>
                 <div class="space-y-4">
-                    <div class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs"><i class="fas fa-phone-alt"></i><span>Kontak</span></div>
+                    <div
+                        class="flex items-center justify-center md:justify-start gap-3 text-rinjani-primary font-bold uppercase tracking-widest text-xs">
+                        <i class="fas fa-phone-alt"></i><span>Kontak</span>
+                    </div>
                     <p class="text-slate-300">WA: 0812-1275-2501<br>Telp: (0370) 123 4567</p>
                 </div>
             </div>
             <div class="flex items-center gap-6 mb-12">
-                <a href="#" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-red-600 transition-all"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-pink-600 transition-all"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"
+                    class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-red-600 transition-all"><i
+                        class="fab fa-youtube"></i></a>
+                <a href="#"
+                    class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-pink-600 transition-all"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="#"
+                    class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-blue-600 transition-all"><i
+                        class="fab fa-facebook-f"></i></a>
             </div>
             <p class="text-slate-500 text-xs">© 2024 Rinjani Medika. Hak Cipta Dilindungi.</p>
         </div>
@@ -478,13 +661,13 @@
             const doc = doctors[id];
             const modal = document.getElementById('doctorModal');
             const content = document.getElementById('modalContent');
-            
+
             document.getElementById('docPhoto').src = doc.photo;
             document.getElementById('docName').innerText = doc.name;
             document.getElementById('docSpec').innerText = doc.spec;
             document.getElementById('docBio').innerText = doc.bio;
             document.getElementById('docEdu').innerText = doc.edu;
-            
+
             const skillsContainer = document.getElementById('docSkills');
             skillsContainer.innerHTML = '';
             doc.skills.forEach(skill => {
@@ -518,7 +701,7 @@
         const nextBtn = document.getElementById('nextBtn');
         const dotsContainer = document.getElementById('sliderDots');
         const cards = slider.querySelectorAll('.testi-card');
-        
+
         cards.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = `w-3 h-3 rounded-full cursor-pointer dot-transition ${i === 0 ? 'bg-rinjani-primary w-8' : 'bg-slate-200'}`;
@@ -532,11 +715,11 @@
         const dots = dotsContainer.children;
 
         function updateSliderUI() {
-            if(cards.length === 0) return;
+            if (cards.length === 0) return;
             const cardWidth = cards[0].offsetWidth + 32;
             const index = Math.round(slider.scrollLeft / cardWidth);
             Array.from(dots).forEach((dot, i) => {
-                if(i === index) {
+                if (i === index) {
                     dot.classList.add('bg-rinjani-primary', 'w-8');
                     dot.classList.remove('bg-slate-200');
                 } else {
@@ -576,7 +759,7 @@
                 try {
                     const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                     if (res.ok) { const data = await res.json(); return data.candidates?.[0]?.content?.parts?.[0]?.text; }
-                } catch (e) {}
+                } catch (e) { }
                 await new Promise(r => setTimeout(r, delay)); delay *= 2;
             }
             throw new Error("Gagal.");
@@ -597,11 +780,12 @@
             }
         });
 
-        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+        document.getElementById('reservationForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const message = `Halo Admin Rinjani Medika, saya ${document.getElementById('patientName').value} ingin reservasi layanan ${document.getElementById('service').value}.`;
             window.open(`https://wa.me/081212752501?text=${encodeURIComponent(message)}`, '_blank');
         });
     </script>
 </body>
+
 </html>
